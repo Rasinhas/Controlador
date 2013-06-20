@@ -1,0 +1,15 @@
+
+utilizar a porta serial cu.* (nao usar tty.*)
+
+para receber o stdout do arduino cat < /dev/cu.* & (rodando em background)
+para enviar echo "" > /dev/cu.*
+
+para fazer usando o programa
+./prog > /dev/cu.*
+
+TODO
+implementar mensagens de controle do arduino
+implementar controle de junta no arduino
+implementar metodo de movimento no arduino
+setar limites de posicao no arduino
+testar no braco robotico
