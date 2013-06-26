@@ -1,15 +1,8 @@
 
-utilizar a porta serial cu.* (nao usar tty.*)
+Robotics Project developed by Felipe Rasinhas and Jonathan Carvalhosa.
 
-para receber o stdout do arduino cat < /dev/cu.* & (rodando em background)
-para enviar echo "" > /dev/cu.*
+The main objective of this project is to manipulate a robotic arm with 6 degrees of freedom using a computer keyboard and an arduino uno board.
 
-para fazer usando o programa
-./prog > /dev/cu.*
+The project consists in a cpp listener file that simply receives data, validates it and generates commands to the robotic arm, a shell script that is responsible for establishing the communication of the computer and the arduino board, and an arduino project that receives the control messages via serial port and send it to the robotic arm motors.
 
-TODO
-implementar mensagens de controle do arduino
-implementar controle de junta no arduino
-implementar metodo de movimento no arduino
-setar limites de posicao no arduino
-testar no braco robotico
+Hardware not included =).

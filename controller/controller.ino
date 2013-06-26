@@ -12,7 +12,7 @@ int cpos[6] = {90,90,90,90,90,180};
 int lb[6] = {0,0,0,0,0,90};
 int ub[6] = {180,180,180,180,180,180};
 
-//degrees turned for an iteration
+//degrees turned for each iteration
 int jsp = 5; // [1,5]
 
 //selected joints
@@ -23,12 +23,10 @@ void setup() {
     pinMode(led, OUTPUT);
 
     // setting servos    
-    for(int i=0;i<6;i++)
-    {
+    for(int i=0;i<6;i++) {
       myServo[i].attach(i+2);
     }
-    for(int i=0;i<6;i++)
-    {
+    for(int i=0;i<6;i++) {
       myServo[i].write(cpos[i]);
     }
     //initializing the serial port (9600 baud)
@@ -38,10 +36,10 @@ void setup() {
 }
  
 // Validates the received byte
-// movements are based on the WASD standard
+// Movements are based on the WASD standard
 void validateByte(int b)
 {
-  Serial.println(jsp);
+  // The numbers are used to select the joint to be moved
   if(b == '1') cd = 0;
   else if(b == '2') cd = 1;
   else if(b == '3') cd = 2;
@@ -67,10 +65,9 @@ void validateByte(int b)
   }
 }
 
-//move the joint given the signal
+// Move the joint given the signal
 void doMove(int s)
 {
-  //Serial.println(cpos[cd]);
   if((s == 1 && cpos[cd] < ub[cd]) || (s == -1 && cpos[cd] > lb[cd]))
   {
     cpos[cd] += s*jsp;
@@ -79,7 +76,7 @@ void doMove(int s)
   }
   else
   {
-    //mensagem de erro
+      //Handle exceptions
   }
 }
  
@@ -87,15 +84,14 @@ void loop() {
     if (Serial.available() > 0) {
         // receives a byte if serial port is available
         incomingByte = Serial.read();     
-        
         validateByte(incomingByte);
         
+        // Test to see if the serial port communication is working properly
+        // h turns the arduino led on and l turns the led off
         if(incomingByte == 'h'){
             digitalWrite(led, HIGH);
-            //Serial.println("LED ON");
         }else if(incomingByte == 'l'){
             digitalWrite(led, LOW);
-            //Serial.println("LED OFF");
         }
        
     }
